@@ -1,4 +1,12 @@
 import 'dotenv/config';
+import admin from 'firebase-admin';
+import { firebaseConfig } from '../../config/serviceAccountKey.json';
+
+admin.initializeApp({
+	credential: admin.credential.cert(firebaseConfig),
+})
+
+const db = admin.firestore()
 
 let productsDao;
 let cartsDao;
@@ -18,8 +26,8 @@ switch(process.env.PERSISTENCIA) {
         const { default: ProductsDaoFB } = require('./daosProducts/productsDaoFB')
         const { default: CartsDaoFB } = require('./daosCarts/cartsDaoFB')
 
-        productsDao = new ProductsDaoFB();
-        cartsDao = new CartsDaoFB();
+        productsDao = new ProductsDaoFB(db);
+        cartsDao = new CartsDaoFB(db);
         break;
     default:
         const { default: ProductsDaoFS } = require('./daosProducts/productsDaoFS')

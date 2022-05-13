@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
+import { connect } from "../../config/mongoose";	
 
+await connect();
 
 class MongoProductsContainer {
     constructor(collection, schema) {
