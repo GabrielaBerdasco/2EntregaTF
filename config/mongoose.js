@@ -1,16 +1,10 @@
 import mongoose from "mongoose";
 
-connect();
-
 export const connect = async() => {
 
     try {
-        const url = 'mongodb://localhost:27017/ecommerce';
-        const answer = await mongoose.connect(url, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            useCreateIndex: true
-        });
+        const url = 'mongodb+srv://GabrielaBerdasco:CoderH33@cluster0.lsmwx.mongodb.net/ecommerce?retryWrites=true&w=majority';
+        const answer = await mongoose.connect(url);
         console.log('MongoDB connected');
 
     } catch (err) {
@@ -18,3 +12,8 @@ export const connect = async() => {
     }
 
 }
+
+connect();
+
+
+

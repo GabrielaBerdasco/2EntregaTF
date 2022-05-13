@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-class Container{
+class ProductsContainer{
     constructor(filename){
         this.filename = filename
     }
@@ -105,4 +105,4 @@ class Container{
     }
 }
 
-export default Container
+export default ProductsContainer

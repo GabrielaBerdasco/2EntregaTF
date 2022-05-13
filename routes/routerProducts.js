@@ -1,17 +1,16 @@
 import express from 'express'
 import { Router } from 'express'
 
-import Container from '../controllers/container.js'
+import { productsDao as productsApi } from '../daos/index.js'
 import { products as prod } from '../controllers/listProducts.js'
-import { login } from '../middleware/middlewareLogin.js'
 
 const routerProducts = Router()
 
 routerProducts.use(express.json())
 routerProducts.use(express.urlencoded({ extended: true }))
 
-const products = new Container('./db/products.txt')
-products.writeFile(prod)
+
+productsApi.writeFile(prod)
 
 routerProducts.get('/:id?', async (req, res) => {
     const { id } = req.params

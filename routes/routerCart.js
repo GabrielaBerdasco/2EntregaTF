@@ -1,15 +1,17 @@
 import express from 'express'
 import { Router } from 'express'
-import CartContainer from '../controllers/cartController.js'
+
+import { cartsDao as cartsApi } from '../daos/index.js'
 import { products as prod } from '../controllers/listProducts.js'
+
 
 const routerCart = Router()
 
 routerCart.use(express.json())
 routerCart.use(express.urlencoded({ extended: true }))
 
-const cart = new CartContainer('./db/cart.txt')
-cart.writeFile([])
+
+cartsApi.writeFile([])
 
 routerCart.post('/', async (req, res) => {
     res.json(await cart.createCart())

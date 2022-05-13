@@ -35,6 +35,7 @@ class CartContainer{
             let data = {
                 id: lastId,
                 timestamp: Date.now(),
+                user: "",
                 products: [],
             }
             let newArray = [...cart, data]
