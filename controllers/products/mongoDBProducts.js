@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { connect } from "../../config/mongoose";	
+import { connect } from "../../config/mongoose.js";	
 
 await connect();
 
@@ -17,19 +17,59 @@ class MongoProductsContainer {
         }
     }
 
-    async addElement(product) {
+    async readFile() {
         try {
-            const savedElement = await this.collection.save(product);
-            console.log(savedElement);
+            const elements = await this.collection.find();
+            return elements;
         } catch (error) {
             console.log(error);
         }
     }
-       
+
+    async saveObject(pData) {
+        try {
+            const savedElement = await this.collection.save(pData);
+            console.log("Producto guardado" + savedElement);
+            
+        } catch (error) {
+            console.log(error);            
+        }
+    }
+
+    async modifyObject(idNumber, pObj) {
+        try {
+            const savedElement = await this.collection.findOneAndUpdate({id: idNumber}, pObj);
+            console.log("Producto modificado" + savedElement);
+            
+        } catch (error) {  
+            console.log(error);
+        }
+    }
+
+    async getById(idNumber) {
+        try {
+            const element = await this.collection.findOne({id: idNumber});
+            console.log(element);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async getAll() {
         try {
             const elements = await this.collection.find();
-            return elements;
+            console.log(elements);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteById(idNumber) {
+        try {
+            await this.collection.deleteOne({id: idNumber});
+            console.log("Elemento con id: " + idNumber + "eliminado");
         } catch (error) {
             console.log(error);
         }

@@ -1,4 +1,4 @@
-{
+const serviceAccount = {
   "type": "service_account",
   "project_id": "backendcoder-9868f",
   "private_key_id": "ac29bf229bdf66235da9850da3f21189823bccbe",
@@ -10,3 +10,5 @@
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-irm20%40backendcoder-9868f.iam.gserviceaccount.com"
 }
+
+export default serviceAccount

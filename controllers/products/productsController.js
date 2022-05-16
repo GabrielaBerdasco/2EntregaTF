@@ -1,5 +1,7 @@
 import fs from 'fs'
 
+import { lastIdFunction } from '../../service/lastIdService.js'
+
 class ProductsContainer{
     constructor(filename){
         this.filename = filename
@@ -24,16 +26,7 @@ class ProductsContainer{
     async saveObject(pData){
         try{
             let products = await this.readFile()
-            let lastId = 0
-            let itemsOnArray = products.length
-
-            if(itemsOnArray !== 0){
-                lastId = products[itemsOnArray-1].id
-                lastId++
-            } else {
-                lastId++
-            }
-
+            let lastId = lastIdFunction(products)
             let data = { ...pData, id: lastId }
             console.log(data);
             

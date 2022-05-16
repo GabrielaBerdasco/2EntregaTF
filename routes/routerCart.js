@@ -14,17 +14,17 @@ routerCart.use(express.urlencoded({ extended: true }))
 cartsApi.writeFile([])
 
 routerCart.post('/', async (req, res) => {
-    res.json(await cart.createCart())
+    res.json(await cartsApi.createCart())
 })
 
 routerCart.delete('/:id', async(req, res) => {
     const { id } = req.params
-    res.json(await cart.deleteCart(id))
+    res.json(await cartsApi.deleteCart(id))
 })
 
 routerCart.get('/:id/products', async (req, res) => {
     const { id } = req.params
-    res.json(await cart.listProducts(id))
+    res.json(await cartsApi.listProducts(id))
 })
 
 routerCart.post('/:id/products', async (req, res) => {
@@ -32,7 +32,7 @@ routerCart.post('/:id/products', async (req, res) => {
     const { productId } = req.body
     const product = prod.find(p => p.id == productId)
     if(product){
-    res.json(await cart.addProductToCart(id, product))
+    res.json(await cartsApi.addProductToCart(id, product))
     } else {
         res.json({ error: 'Producto no encontrado' })
         console.log('Producto no encontrado');
@@ -41,7 +41,7 @@ routerCart.post('/:id/products', async (req, res) => {
 
 routerCart.delete('/:id/products/:idProduct', async (req, res) => {
     const { id, idProduct } = req.params
-    res.json(await cart.deleteProductFromCart(id, idProduct))
+    res.json(await cartsApi.deleteProductFromCart(id, idProduct))
 })
 
 

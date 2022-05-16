@@ -1,7 +1,7 @@
-import { Schema } from "mongoose";
-import MongoProductsContainer from "../../controllers/products/mongoDBProducts";
+import mongoose from "mongoose";
+import MongoProductsContainer from "../../controllers/products/mongoDBProducts.js";
 
-const schema = new Schema({
+const schema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     image: { type: String, required: true },
     name: { type: String, required: true, max: 100 },

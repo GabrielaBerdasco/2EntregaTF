@@ -1,8 +1,8 @@
-import FirebaseProdContainer from "../../controllers/products/firebaseProducts";
+import FirebaseProdContainer from "../../controllers/products/firebaseProducts.js";
 
 class ProductsDaoFB extends FirebaseProdContainer {
     constructor(db) {
-        super('products', db);
+        super(db, 'products');
     }
 }
 

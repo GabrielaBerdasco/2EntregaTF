@@ -1,4 +1,5 @@
 import fs from 'fs'
+import { lastIdFunction } from '../../service/lastIdService.js';
 
 class CartContainer{
     constructor(filename){
@@ -23,14 +24,7 @@ class CartContainer{
     async createCart(){
         try{
             let cart = await this.readFile()
-            let lastId = 0
-            let itemsOnArray = cart.length
-            if(itemsOnArray > 0){
-                lastId = cart[itemsOnArray-1].id
-                lastId++
-            } else {
-                lastId++
-            }
+            let lastId = lastIdFunction(cart)
 
             let data = {
                 id: lastId,
