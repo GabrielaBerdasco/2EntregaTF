@@ -11,7 +11,7 @@ routerCart.use(express.json())
 routerCart.use(express.urlencoded({ extended: true }))
 
 
-cartsApi.writeFile([])
+cartsApi.writeFile()
 
 routerCart.post('/', async (req, res) => {
     res.json(await cartsApi.createCart())

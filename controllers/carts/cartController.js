@@ -8,8 +8,13 @@ class CartContainer{
 
     async writeFile(data){
         try {
+            if(data){
             let dataToString = JSON.stringify(data)
             await fs.promises.writeFile(this.filename, dataToString)
+            console.log("Datos escritos")
+            } else {
+                await fs.promises.writeFile(this.filename, "[]")
+            }
         } catch (error) {
             console.log(error);
         }

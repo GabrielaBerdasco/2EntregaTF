@@ -8,10 +8,12 @@ class FirebaseCartsContainer{
 
     async writeFile(data){
         try {
-            let id = data.id;
-            let doc = this.query.doc(`${id}`);
-            await doc.create({timestamp: data.timestamp, user: data.user, products: data.products});
-            console.log(`Nuevo carrito creado con id: ${id}`);
+            if(data) {
+                let id = data.id;
+                let doc = this.query.doc(`${id}`);
+                await doc.create({timestamp: data.timestamp, user: data.user, products: data.products});
+                console.log(`Nuevo carrito creado con id: ${id}`);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -44,7 +46,7 @@ class FirebaseCartsContainer{
                 user: "",
                 products: [],
             }
-            this.writeFile(data)
+            await this.writeFile(data)
             console.log(`Nuevo carrito creado con id: ${lastId}`);
         } catch (error) {
             console.log(error);
@@ -56,7 +58,7 @@ class FirebaseCartsContainer{
             let id = idNumber;
             const doc = this.query.doc(`${id}`);
             const item = await doc.delete();
-            console.log("El carrito " + item + " fue eliminado");
+            console.log("El carrito con id: " + id + " fue eliminado");
 
         } catch (error) {
             console.log(error);

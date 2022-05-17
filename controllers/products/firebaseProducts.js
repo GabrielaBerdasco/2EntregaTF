@@ -7,28 +7,11 @@ class FirebaseProdContainer{
 
     async writeFile(data) {
         try {
-            const doc = this.query.doc(`${data.id}`);
-            await doc.create(data);
-            console.log("Datos escritos");   
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async readFile() {
-        try {
-            let cart = await this.query.get();
-            let docs = cart.docs;
-            const response = docs.map((doc) => ({
-                date: doc.date,
-                image: doc.image,
-                name: doc.name,
-                description: doc.description,
-                price: doc.price,
-                stock: doc.stock,
-                code: doc.code,
-            }));
-            return response;   
+            await data.map( (products) => {
+                const doc = this.query.doc(`${products.id}`);
+                doc.create(products);
+            });
+            console.log("Datos escritos");
         } catch (error) {
             console.log(error);
         }
@@ -54,8 +37,10 @@ class FirebaseProdContainer{
 
     async getById(idNumber) {
         try {
-            const element = await this.query.get(idNumber);
-            console.log(element);
+            const element = await this.query.doc(`${idNumber}`);
+            const doc = await element.get();
+            const response = doc.data()
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
@@ -64,7 +49,18 @@ class FirebaseProdContainer{
     async getAll() {
         try {
             const elements = await this.query.get();
-            console.log(elements);
+            const docs = elements.docs;
+            const response = docs.map((doc) => ({
+                id: doc.id,
+                date: doc.data().date,
+                image: doc.data().image,
+                name: doc.data().name,
+                description: doc.data().description,
+                price: doc.data().price,
+                stock: doc.data().stock,
+                code: doc.data().code,
+            }));
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
